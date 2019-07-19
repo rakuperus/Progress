@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     fun addProgressClicked(view: View) {
         val currentDateTime = Calendar.getInstance().time
 
-        progressViewModel.insert(Progress(12, currentDateTime.time, seekBar.progress+1L))
+        progressViewModel.insert(Progress(currentDateTime.time, seekBar.progress+1L))
 
         Snackbar.make(mainView, "Added progress at ${currentDateTime.time} with value ${seekBar.progress+1}", Snackbar.LENGTH_SHORT).show()
     }

@@ -4,11 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.smallshards.progress.model.Progress
-import com.smallshards.progress.model.ProgressDatabase
-import com.smallshards.progress.model.ProgressRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
+import com.smallshards.progress.model.*
 
 class ProgressViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -21,7 +19,7 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
         allProgress = repository.allProgress
     }
 
-    fun insert(item: Progress) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(item: Progress) = viewModelScope.launch {
         repository.insert(item)
     }
 }

@@ -18,11 +18,11 @@ interface ProgressDao {
     suspend fun insert(item : Progress)
 
     @Query ("DELETE FROM progress")
-    fun deletAll()
+    suspend fun deleteAll()
 
 }
 
-@Database(entities = arrayOf(Progress::class), version = 1)
+@Database(entities = [Progress::class], version = 2)
 abstract class ProgressDatabase : RoomDatabase() {
     abstract fun progressDao() : ProgressDao
 
@@ -30,7 +30,7 @@ abstract class ProgressDatabase : RoomDatabase() {
         @Volatile
         private var Instance : ProgressDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope)  :ProgressDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope) : ProgressDatabase {
 
             return Instance ?: synchronized(this) {
 
@@ -39,6 +39,7 @@ abstract class ProgressDatabase : RoomDatabase() {
                     ProgressDatabase::class.java,
                     "Progress_Database"
                 )
+                    .fallbackToDestructiveMigration()
                     .addCallback(ProgressDatabaseCallback(scope))
                     .build()
 
@@ -48,24 +49,24 @@ abstract class ProgressDatabase : RoomDatabase() {
             }
 
         }
-    }
 
-    private class ProgressDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
-            Instance?.let { 
-                database -> scope.launch {
-                    populateDatabase(database.progressDao())
+        private class ProgressDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+                Instance?.let { database ->
+                    scope.launch {
+                        populateDatabase(database.progressDao())
+                    }
                 }
             }
         }
 
         suspend fun populateDatabase(dao: ProgressDao) {
-            dao.deletAll()
+            dao.deleteAll()
 
-            dao.insert(Progress(1, 200000000, 7))
-            dao.insert(Progress(2, 200003421, 3))
-            dao.insert(Progress(3, 347840000, 4))
+            dao.insert(Progress(200000000, 7))
+            dao.insert(Progress(200003421, 3))
+            dao.insert(Progress(347840000, 4))
         }
     }
 }
@@ -84,12 +85,12 @@ class ProgressRepository (private val progressDao: ProgressDao){
 
 @Entity(tableName = "progress")
 data class Progress(
-    @PrimaryKey @ColumnInfo(name="id")
-    val id : Long,
-
     @ColumnInfo(name = "date")
     val dateTime : Long,
 
     @ColumnInfo(name = "val")
     val progressValue : Long
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id : Long = 0
+}
