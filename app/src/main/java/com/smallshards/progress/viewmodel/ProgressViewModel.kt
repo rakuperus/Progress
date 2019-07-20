@@ -4,9 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.smallshards.progress.model.progress.Progress
+import com.smallshards.progress.model.progress.ProgressDatabase
+import com.smallshards.progress.model.progress.ProgressRepository
 import kotlinx.coroutines.launch
-
-import com.smallshards.progress.model.*
 
 class ProgressViewModel(application: Application) : AndroidViewModel(application) {
 

@@ -1,36 +1,36 @@
-package com.smallshards.progress.model
+package com.smallshards.progress.model.progress
 
 import android.content.Context
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+
 @Dao
 interface ProgressDao {
 
-    @Query("SELECT * FROM progress ORDER BY date")
+    @Query("SELECT * FROM progress ORDER BY timeMillis ")
     fun getAllProgress(): LiveData<List<Progress>>
 
     @Insert
-    suspend fun insert(item : Progress)
+    suspend fun insert(item: Progress)
 
-    @Query ("DELETE FROM progress")
+    @Query("DELETE FROM progress")
     suspend fun deleteAll()
 
 }
 
-@Database(entities = [Progress::class], version = 2)
+@Database(entities = [Progress::class], version = 3)
 abstract class ProgressDatabase : RoomDatabase() {
-    abstract fun progressDao() : ProgressDao
+    abstract fun progressDao(): ProgressDao
 
     companion object {
         @Volatile
-        private var Instance : ProgressDatabase? = null
+        private var Instance: ProgressDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope) : ProgressDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope): ProgressDatabase {
 
             return Instance ?: synchronized(this) {
 
@@ -40,7 +40,11 @@ abstract class ProgressDatabase : RoomDatabase() {
                     "Progress_Database"
                 )
                     .fallbackToDestructiveMigration()
-                    .addCallback(ProgressDatabaseCallback(scope))
+                    .addCallback(
+                        ProgressDatabaseCallback(
+                            scope
+                        )
+                    )
                     .build()
 
                 Instance = inst
@@ -71,26 +75,3 @@ abstract class ProgressDatabase : RoomDatabase() {
     }
 }
 
-
-class ProgressRepository (private val progressDao: ProgressDao){
-
-    val allProgress = progressDao.getAllProgress()
-
-    @WorkerThread
-    suspend fun insert(item : Progress) {
-        progressDao.insert(item)
-    }
-
-}
-
-@Entity(tableName = "progress")
-data class Progress(
-    @ColumnInfo(name = "date")
-    val dateTime : Long,
-
-    @ColumnInfo(name = "val")
-    val progressValue : Long
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id : Long = 0
-}

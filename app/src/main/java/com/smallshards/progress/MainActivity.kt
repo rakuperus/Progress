@@ -1,17 +1,18 @@
 package com.smallshards.progress
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.smallshards.progress.model.Progress
+import com.smallshards.progress.model.progress.Progress
 import com.smallshards.progress.viewmodel.ProgressViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.progress_item.view.*
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         seekBar.setOnSeekBarChangeListener (object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                seekBarValue.text = "${progress+1}"
+                seekBarValue.text = (progress + 1).toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -47,10 +48,16 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun addProgressClicked(view: View) {
         val currentDateTime = Calendar.getInstance().time
 
-        progressViewModel.insert(Progress(currentDateTime.time, seekBar.progress+1L))
+        progressViewModel.insert(
+            Progress(
+                currentDateTime.time,
+                seekBar.progress + 1L
+            )
+        )
 
         Snackbar.make(mainView, "Added progress at ${currentDateTime.time} with value ${seekBar.progress+1}", Snackbar.LENGTH_SHORT).show()
     }
@@ -70,9 +77,9 @@ class MainActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ProgressViewHolder, position: Int) {
             val currentItem = progressData[position]
-            holder.idTextView.text = "${currentItem.id}"
-            holder.dateTimeTextView.text = "${currentItem.dateTime}"
-            holder.progressTextView.text = "${currentItem.progressValue}"
+            holder.idTextView.text = currentItem.id.toString()
+            holder.dateTimeTextView.text = "${currentItem.date} ${currentItem.time}"
+            holder.progressTextView.text = currentItem.progressValue.toString()
         }
 
         internal fun setProgressData(newProgressData: List<Progress>) {
@@ -81,9 +88,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         inner class ProgressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val idTextView = itemView.progressId
-            val dateTimeTextView = itemView.dateTime
-            val progressTextView = itemView.progressValue
+            val idTextView: TextView = itemView.progressId
+            val dateTimeTextView: TextView = itemView.dateTime
+            val progressTextView: TextView = itemView.progressValue
         }
     }
 
