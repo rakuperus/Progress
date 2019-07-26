@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Progress</string>
     <string name="add">Add</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_progress_value">55</string>
 </resources>

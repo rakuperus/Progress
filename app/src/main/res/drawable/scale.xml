@@ -8,11 +8,11 @@
 
     <!-- background -->
     <path
-        android:fillColor="#11008577"
+        android:fillColor="#dddddd"
         android:pathData="M0,0h108v54h-108z" />
 
     <path
-        android:pathData="M0,026L54,26L108,0L108,28L54,28L0,54L0,28"
+        android:pathData="M2,26L52,26L106,2L106,28L52,28L2,52L2,28"
         android:strokeColor="#33FFFFFF">
         <aapt:attr name="android:fillColor">
             <gradient

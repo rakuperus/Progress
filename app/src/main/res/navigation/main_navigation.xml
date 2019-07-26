@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@+id/mainLayoutFragment">
+
+    <fragment
+        android:id="@+id/mainLayoutFragment"
+        android:name="com.smallshards.progress.view.MainLayoutFragment"
+        android:label="fragment_add_progress"
+        tools:layout="@layout/fragment_main_layout">
+        <action
+            android:id="@+id/action_mainLayoutFragment_to_progressDetailFragment"
+            app:destination="@id/progressDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/progressDetailFragment"
+        android:name="com.smallshards.progress.view.ProgressDetailFragment"
+        android:label="fragment_progress_detail"
+        tools:layout="@layout/fragment_progress_detail">
+        <argument
+            android:name="progressDate"
+            app:argType="long" />
+    </fragment>
+</navigation>
