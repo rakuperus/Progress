@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.ViewDebug
 import androidx.lifecycle.ViewModelProviders
@@ -54,6 +53,9 @@ class GraphView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val strokeWidth: Float
     private val strokeColor: Int
 
+    private val paint = Paint()
+    private val path = Path()
+
     init {
         // get the min and max values from the XML attributes
         context.obtainStyledAttributes(attrs, R.styleable.ProgressView, 0, 0).apply {
@@ -78,15 +80,17 @@ class GraphView(context: Context, attrs: AttributeSet) : View(context, attrs) {
                         else -> tempMaxVerticalValue
                     }
             } finally {
-                recycle()
+                this.recycle()
             }
         }
 
+        paint.style = Paint.Style.STROKE
+        paint.color = strokeColor
+        paint.strokeWidth = strokeWidth
+        paint.isAntiAlias = true
+        paint.setShadowLayer(4F, 2F, 2F, 0x80000000.toInt())
 
         verticalRange = maxVerticalValue - minVerticalValue
-
-        Log.d(TAG_NAME, "Values range from $minVerticalValue to $maxVerticalValue")
-        Log.d(TAG_NAME, "Context is of type ${context.javaClass.simpleName}")
     }
 
     private lateinit var progressViewModel: ProgressViewModel
@@ -104,15 +108,8 @@ class GraphView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     override fun onDraw(canvas: Canvas?) {
 
-        val paint = Paint()
-        paint.style = Paint.Style.STROKE
-        paint.color = strokeColor
-        paint.strokeWidth = strokeWidth
-        paint.isAntiAlias = true
-        paint.setShadowLayer(4F, 2F, 2F, 0x80000000.toInt())
-
         if (progressData.isNotEmpty()) {
-            val path = Path()
+            path.reset()
             path.moveTo(getScaledX(0), getScaledY(progressData[0].progressValue.toFloat()))
             for (i in 1 until progressData.size) {
                 path.lineTo(getScaledX(i), getScaledY(progressData[i].progressValue.toFloat()))
@@ -130,18 +127,14 @@ class GraphView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         }
         val scaledValue = normalizedValue - minVerticalValue
 
-        val scaledY = viewHeight - ((scaledValue / maxVerticalValue.toFloat()) * viewHeight) + paddingTop
-
-        return scaledY
+        return viewHeight - ((scaledValue / maxVerticalValue.toFloat()) * viewHeight) + paddingTop
     }
 
     private fun getScaledX(index: Int): Float {
         val viewWidth = width - (paddingStart + paddingEnd)
 
-        val scaledX = if (progressData.isNotEmpty())
+        return if (progressData.isNotEmpty())
             ((index.toFloat() / (progressData.size - 1).toFloat()) * viewWidth) + paddingStart
         else viewWidth.toFloat()
-
-        return scaledX
     }
 }
