@@ -68,9 +68,16 @@ abstract class ProgressDatabase : RoomDatabase() {
         suspend fun populateDatabase(dao: ProgressDao) {
             dao.deleteAll()
 
-            dao.insert(Progress(200000000, 7))
-            dao.insert(Progress(200003421, 3))
-            dao.insert(Progress(347840000, 4))
+            dao.insert(Progress(1564668557000, 75))
+            dao.insert(Progress(1564754957000, 38))
+            dao.insert(Progress(1564841357000, 42))
+            dao.insert(Progress(1564927757000, 51))
+            dao.insert(Progress(1564938557000, -10))
+            dao.insert(Progress(1565014157000, 87))
+            dao.insert(Progress(1565100557000, 12))
+            dao.insert(Progress(1565186957000, 103))
+            dao.insert(Progress(1565273357000, 66))
+            dao.insert(Progress(1565359757000, 48))
         }
     }
 }
