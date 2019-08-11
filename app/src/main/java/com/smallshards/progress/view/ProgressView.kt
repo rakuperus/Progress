@@ -18,6 +18,7 @@ class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs)
 
     companion object {
         const val TAG_NAME = "ProgressView"
+        const val CURVE_SMOOTHENESS = 0.15F
     }
 
     /**
@@ -223,13 +224,44 @@ class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs)
         canvas.drawLine(paddingStart.toFloat(), height / 2F, (width - paddingEnd).toFloat(), height / 2F, linePaint)
     }
 
+    private data class Point(
+        val x: Float,
+        val y: Float
+    )
+
     private fun drawGraph(canvas: Canvas, points: List<DataPoint>, rangeStart: Int, rangeEnd: Int) {
         val rs = if (rangeStart > 0) rangeStart - 1 else rangeStart
 
         path.reset()
+
         path.moveTo(points[rs].currentX, points[rs].currentY)
-        points.subList(rs + 1, rangeEnd).forEach {
-            path.lineTo(it.currentX, it.currentY)
+        for (idx in rs + 1 until rangeEnd) {
+            val crntPoint = points[idx]
+            val prevPoint = if (idx - 1 >= 0) points[idx - 1] else points[0]
+            val rightPoint = if (idx + 1 < rangeEnd) points[idx + 1] else crntPoint
+            val leftPoint = if (idx - 2 >= 0) points[idx - 2] else points[0]
+
+            val leftDiffX = prevPoint.currentX - leftPoint.currentX
+            val leftDiffY = prevPoint.currentY - leftPoint.currentY
+
+            val rightDiffX = rightPoint.currentX - crntPoint.currentX
+            val rightDiffY = rightPoint.currentY - crntPoint.currentY
+
+            val controlLeft = Point(
+                prevPoint.currentX + (CURVE_SMOOTHENESS * leftDiffX),
+                prevPoint.currentY + (CURVE_SMOOTHENESS * leftDiffY)
+            )
+
+            val controlRight = Point(
+                crntPoint.currentX - (CURVE_SMOOTHENESS * rightDiffX),
+                crntPoint.currentY - (CURVE_SMOOTHENESS * rightDiffY)
+            )
+
+            path.cubicTo(
+                controlLeft.x, controlLeft.y,
+                controlRight.x, controlRight.y,
+                crntPoint.currentX, crntPoint.currentY
+            )
         }
 
         canvas.drawPath(path, pathPaint)

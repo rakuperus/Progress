@@ -18,7 +18,7 @@ class DataPoint(x: Float, y: Float, val dateTime: Long, val bounce: BounceDirect
         NONE
     }
 
-    var distanceToCover = 50
+    var distanceToCover = 30
     var increaseY = true
 
     var currentX: Float = x
@@ -31,10 +31,7 @@ class DataPoint(x: Float, y: Float, val dateTime: Long, val bounce: BounceDirect
     var velocity: Float = ANIM_VELOCITY
 
 
-    val bounceDirection = BounceDirection.VERTICAL
-    val bounceSize = false
-
-    var atRest = false
+    var atRest = (bounce == BounceDirection.NONE)
 
     var detailDataPoints: List<DataPoint> = emptyList()
 
