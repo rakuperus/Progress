@@ -8,9 +8,10 @@
 
     <!-- background -->
     <path
-        android:fillColor="#dddddd"
+        android:fillColor="#00ffffff"
         android:pathData="M0,0h108v54h-108z" />
 
+    <!-- bow tie from red to green -->
     <path
         android:pathData="M2,26L52,26L106,2L106,28L52,28L2,52L2,28"
         android:strokeColor="#33FFFFFF">

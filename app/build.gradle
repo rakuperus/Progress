@@ -64,6 +64,9 @@ dependencies {
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
 
+    // Material design
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'

@@ -1,72 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AddProgressFragment">
+    android:layout_margin="@dimen/horizontal_margin">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="4dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/addNewProgressButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/scale" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/progressLayout">
 
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/seekBar"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar"
-        app:srcCompat="@drawable/ic_sentiment_very_dissatisfied_black_24dp" />
+        <ImageView
+            android:id="@+id/scaleBackgroundImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/background_slider_contentdescription"
+            android:src="@drawable/scale"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dividerImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:srcCompat="@drawable/ic_mood_black_24dp" />
+        <ImageView
+            android:id="@+id/sadImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:tint="@color/design_default_color_secondary"
+            app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scaleBackgroundImage"
+            app:layout_constraintVertical_bias="0.55"
+            app:srcCompat="@drawable/ic_sentiment_very_dissatisfied_black_24dp" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="99"
-        android:min="0"
-        android:progress="55"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/happyImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:tint="@color/design_default_color_secondary"
+            app:layout_constraintBottom_toBottomOf="@+id/scaleBackgroundImage"
+            app:layout_constraintEnd_toEndOf="@+id/progressIndicatorSeekBar"
+            app:layout_constraintTop_toTopOf="@+id/progressIndicatorSeekBar"
+            app:layout_constraintVertical_bias="0.45"
+            app:srcCompat="@drawable/ic_mood_black_24dp" />
 
-    <TextView
-        android:id="@+id/seekBarValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/default_progress_value"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        <SeekBar
+            android:id="@+id/progressIndicatorSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="55"
+            android:thumbTint="?attr/colorPrimary"
+            android:progressTint="?attr/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/scaleBackgroundImage"
+            app:layout_constraintEnd_toEndOf="@+id/dividerImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scaleBackgroundImage" />
 
-    <Button
-        android:id="@+id/addNewProgressButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/progressIndicatorExtendedTick"
+            android:layout_width="16dp"
+            android:layout_height="1dp"
+            android:tint="?attr/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/progressIndicatorSeekBar"
+            app:layout_constraintEnd_toEndOf="@id/scaleBackgroundImage"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintStart_toStartOf="@id/scaleBackgroundImage" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/progressIndicatorFlyoutTick"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_location_on_black_24dp"
+            android:tint="?attr/colorPrimary"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/progressIndicatorSeekBar"
+            app:layout_constraintEnd_toEndOf="@id/progressIndicatorExtendedTick"
+            app:layout_constraintStart_toStartOf="@id/progressIndicatorExtendedTick" />
+
+        <TextView
+            android:id="@+id/progressIndicatorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/default_progress_value"
+            android:textColor="?attr/colorOnPrimary"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/progressIndicatorFlyoutTick"
+            app:layout_constraintStart_toStartOf="@+id/progressIndicatorFlyoutTick"
+            app:layout_constraintTop_toTopOf="@+id/progressIndicatorFlyoutTick" />
+
+        <ImageView
+            android:id="@+id/dividerImage"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:background="?android:attr/colorPrimary"
+            android:contentDescription="@string/divider_contentdescription"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addDataPointButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addDataPointButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-thin"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="@string/add_datapoint_button"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
