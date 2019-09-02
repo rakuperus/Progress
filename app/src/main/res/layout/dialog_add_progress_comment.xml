@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dialog_padding">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/comment_goal1_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tool:text="Goal #1 achieved" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/comment_goal2_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tool:text="Goal #2 achieved" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/comment_goal3_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tool:text="Goal #2 achieved" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/comment_inputtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/comment_title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/comment_inputtext"
+        android:text="@string/add_message_message_hint" />
+
+</LinearLayout>

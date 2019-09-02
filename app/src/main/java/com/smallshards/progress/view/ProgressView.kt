@@ -7,12 +7,8 @@ import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewDebug
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.smallshards.progress.MainActivity
 import com.smallshards.progress.R
 import com.smallshards.progress.model.progress.Progress
-import com.smallshards.progress.viewmodel.ProgressViewModel
 
 class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
@@ -190,22 +186,14 @@ class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs)
         linePaint.isAntiAlias = true
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
-        dataBindProgressData(horizontalScale, this)
-    }
-
-    private lateinit var progressViewModel: ProgressViewModel
-
-    private fun dataBindProgressData(scaleX: Int, v: View) {
-        val parentActivity = context as MainActivity
-        progressViewModel = ViewModelProviders.of(parentActivity).get(ProgressViewModel::class.java)
-        progressViewModel.allProgress.observe(parentActivity, Observer { progress ->
-            progress?.let {
-                progressData = mapProgressToDataPoints(it, scaleX, minVerticalValue, maxVerticalValue, v)
-            }
-        })
+    fun changeProgressData(value: List<Progress>) {
+        progressData = mapProgressToDataPoints(
+            value,
+            horizontalScale,
+            minVerticalValue,
+            maxVerticalValue,
+            this
+        )
     }
 
     override fun onDraw(canvas: Canvas) {

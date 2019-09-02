@@ -6,4 +6,13 @@
     <color name="background">#cccccc</color>
     <color name="scale_background">#00ffffff</color>
     <color name="scale_stroke">#33FFFFFF</color>
+
+    <color name="primaryColor">#880e4f</color>
+    <color name="primaryLightColor">#bc477b</color>
+    <color name="primaryDarkColor">#560027</color>
+    <color name="secondaryColor">#fdd835</color>
+    <color name="secondaryLightColor">#ffff6b</color>
+    <color name="secondaryDarkColor">#c6a700</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
 </resources>

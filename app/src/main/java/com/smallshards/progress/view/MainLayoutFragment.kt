@@ -14,5 +14,4 @@ class MainLayoutFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main_layout, container, false)
     }
 
-
 }

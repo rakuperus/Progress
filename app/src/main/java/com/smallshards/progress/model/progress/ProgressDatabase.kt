@@ -22,7 +22,7 @@ interface ProgressDao {
 
 }
 
-@Database(entities = [Progress::class], version = 3)
+@Database(entities = [Progress::class], version = 6)
 abstract class ProgressDatabase : RoomDatabase() {
     abstract fun progressDao(): ProgressDao
 

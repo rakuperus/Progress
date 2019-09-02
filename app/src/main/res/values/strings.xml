@@ -2,10 +2,15 @@
     <string name="app_name">Progress</string>
     <string name="add">Add</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hallo?</string>
+
     <string name="default_progress_value">55</string>
     <string name="background_slider_contentdescription">Background image for the slider</string>
     <string name="divider_contentdescription">Divider image</string>
     <string name="add_datapoint_button">+</string>
+
+    <string name="add_message_dialog_title">Progress comment</string>
+    <string name="add_message_confirm">Add comment</string>
+    <string name="add_message_dismiss">Cancel</string>
+    <string name="add_message_message_hint">How are you feeling at this moment?</string>
 </resources>
