@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="iteminfo"
+            type="com.smallshards.progress.viewmodel.ProgressItemInfoViewModel" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -94,6 +101,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <ImageButton
+                    android:id="@+id/addMessageButton"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/add_message_button_description"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:src="@drawable/ic_progress_item_info_32dp"
+                    app:progressItemTint="@{ iteminfo.itemInfoSet }"
+                    tools:tint="@color/primaryDisabled" />
+
                 <Button
                     android:id="@+id/addDataPointButton"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -104,18 +124,9 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp"
                     android:text="@string/add_datapoint_button"
+                    android:textColor="@color/primaryColor"
                     android:textSize="36sp" />
 
-                <ImageButton
-                    android:id="@+id/addMessageButton"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingTop="@dimen/vertical_margin"
-                    android:paddingBottom="@dimen/vertical_margin"
-                    android:src="@drawable/ic_loyalty_black_24dp"
-                    android:tint="@color/primaryColor" />
             </LinearLayout>
 
             <SeekBar
@@ -132,33 +143,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/scaleBackgroundImage" />
 
-            <!--
-            <ImageView
-                android:id="@+id/buttonDividerImage"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_margin="8dp"
-                android:background="?android:attr/colorPrimary"
-                android:contentDescription="@string/divider_contentdescription"
-                app:layout_constraintStart_toEndOf="@+id/dividerImage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addMessageButton" />
-
-            <ImageButton
-                android:id="@+id/addMessageButton"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:paddingTop="@dimen/vertical_margin"
-                android:paddingBottom="@dimen/vertical_margin"
-                android:src="@drawable/ic_loyalty_black_24dp"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:tint="@color/colorPrimary"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/dividerImage"
-                />
-            -->
-
             <TextView
                 android:id="@+id/progressIndicatorText"
                 android:layout_width="wrap_content"
@@ -171,22 +155,7 @@
                 app:layout_constraintStart_toStartOf="@+id/progressIndicatorFlyoutTick"
                 app:layout_constraintTop_toTopOf="@+id/progressIndicatorFlyoutTick" />
 
-            <TextView
-                android:id="@+id/texty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewmodel.progressMessage}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Some sample text to layout" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <data>
-
-        <variable
-            name="viewmodel"
-            type="com.smallshards.progress.viewmodel.ProgressViewModel" />
-    </data>
 </layout>

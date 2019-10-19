@@ -1,10 +1,18 @@
 package com.smallshards.progress.view
 
+import java.math.BigInteger
+
 /**
  * <p>This class is used to represent the data points in the actual 2D space.
  * All points are able to animate in 2D and in size</p>
  */
-class DataPoint(x: Float, y: Float, val dateTime: Long, val bounce: BounceDirection = BounceDirection.NONE) {
+class DataPoint(
+    x: Float,
+    y: Float,
+    val goalBits: Long,
+    val dateTime: Long,
+    val bounce: BounceDirection = BounceDirection.NONE
+) {
 
     companion object {
         const val DATA_POINT_SIZE = 14F
@@ -52,6 +60,15 @@ class DataPoint(x: Float, y: Float, val dateTime: Long, val bounce: BounceDirect
             distanceToCover -= 4
             increaseY = false
         }
-
     }
+
+    val goal1Set: Boolean
+        get() = (BigInteger.valueOf(goalBits).testBit(0))
+
+    val goal2Set: Boolean
+        get() = (BigInteger.valueOf(goalBits).testBit(1))
+
+    val goal3Set: Boolean
+        get() = (BigInteger.valueOf(goalBits).testBit(2))
+
 }

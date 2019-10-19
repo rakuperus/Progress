@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.PorterDuff
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewDebug
 import com.smallshards.progress.R
@@ -72,6 +74,7 @@ class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs)
                 DataPoint(
                     view.getScaledX(idx, limit, scaleX, 14),
                     view.getScaledY(it.progressValue.toInt(), minY, maxY, 14),
+                    it.goalsReached,
                     it.dateTime,
                     if (idx == limit - 1) DataPoint.BounceDirection.VERTICAL else DataPoint.BounceDirection.NONE
                 )
@@ -125,8 +128,9 @@ class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs)
     private val linePaint = Paint()
     private val path = Path()
 
-    init {
+    private val viewContext = context
 
+    init {
         // get the min and max values from the XML attributes
         context.obtainStyledAttributes(attrs, R.styleable.ProgressView, 0, 0).apply {
             try {
@@ -256,10 +260,42 @@ class ProgressView(context: Context, attrs: AttributeSet) : View(context, attrs)
     }
 
     private fun drawDataPoints(canvas: Canvas, points: List<DataPoint>, rangeStart: Int, rangeEnd: Int) {
+
         points.subList(rangeStart, rangeEnd).forEach {
-            canvas.drawCircle(it.currentX, it.currentY, it.currentSize, dataPointPaint)
+
+            if (it.goalBits > 0) {
+                val width = dpToPx(24, viewContext)
+                val height = dpToPx(24, viewContext)
+
+                val x = it.currentX.toInt() - width / 2
+                val y = it.currentY.toInt() - height / 2
+
+                val d = viewContext.resources.getDrawable(R.drawable.ic_star_black_24dp, null)
+                d.setBounds(x, y, x + width, y + height)
+
+                val color = when {
+                    it.goal1Set -> R.color.one_star_color
+                    it.goal2Set -> R.color.two_star_color
+                    it.goal3Set -> R.color.three_star_color
+                    else -> R.color.colorAccent
+                }
+                d.setColorFilter(
+                    viewContext.resources.getColor(color, null),
+                    PorterDuff.Mode.MULTIPLY
+                )
+                d.draw(canvas)
+
+            } else {
+                canvas.drawCircle(it.currentX, it.currentY, it.currentSize, dataPointPaint)
+            }
         }
+
+
     }
+
+    private fun dpToPx(dp: Int, context: Context): Int =
+        dp * context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT
+
 }
 
 /**

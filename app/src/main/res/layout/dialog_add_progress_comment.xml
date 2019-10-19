@@ -10,18 +10,21 @@
         android:id="@+id/comment_goal1_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/CheckBoxTheme"
         tool:text="Goal #1 achieved" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/comment_goal2_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/CheckBoxTheme"
         tool:text="Goal #2 achieved" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/comment_goal3_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/CheckBoxTheme"
         tool:text="Goal #2 achieved" />
 
     <com.google.android.material.textfield.TextInputEditText

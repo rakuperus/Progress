@@ -14,6 +14,7 @@ import java.math.BigInteger
 
 class AddProgressCommentDialog(context: Context) : MaterialAlertDialogBuilder(context) {
 
+    // the editView is the root of all controls in the dialog
     private val editView by lazy {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.dialog_add_progress_comment, null)
@@ -67,7 +68,7 @@ class AddProgressCommentDialog(context: Context) : MaterialAlertDialogBuilder(co
     }
 
     /**
-     * <p>Check if any of the comment fields are checked. Values are will be useful after a call to show</p>
+     * <p>Check if any of the comment fields are checked. Values will be useful after a call to show</p>
      *
      */
     val isCommentSet: Boolean
@@ -80,23 +81,26 @@ class AddProgressCommentDialog(context: Context) : MaterialAlertDialogBuilder(co
         return this
     }
 
-    fun setGoal1Label(value: String): AddProgressCommentDialog {
-        val view = editView.findViewById<MaterialCheckBox>(R.id.comment_goal1_checkbox)
+    /**
+     * Change the label of one of the goal checkboxes in the dialog. If the label is empty
+     * the checkbox will not be visible
+     */
+    fun setGoalLabel(goalNumber: Int, value: String): AddProgressCommentDialog {
+
+        val viewId = when (goalNumber) {
+            2 -> R.id.comment_goal2_checkbox
+            3 -> R.id.comment_goal3_checkbox
+            else -> R.id.comment_goal1_checkbox
+        }
+
+        val view = editView.findViewById<MaterialCheckBox>(viewId)
         view?.text = value
 
         return this
     }
 
-    fun setGoal2Label(value: String): AddProgressCommentDialog {
-        val view = editView.findViewById<MaterialCheckBox>(R.id.comment_goal2_checkbox)
-        view?.text = value
-
-        return this
-    }
-
-    fun setGoal3Label(value: String): AddProgressCommentDialog {
-        val view = editView.findViewById<MaterialCheckBox>(R.id.comment_goal3_checkbox)
-        view?.text = value
+    fun setGoalLabels(labels: Array<String>): AddProgressCommentDialog {
+        labels.mapIndexed { index, s -> setGoalLabel(index + 1, s) }
 
         return this
     }
