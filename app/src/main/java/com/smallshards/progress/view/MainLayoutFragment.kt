@@ -13,6 +13,6 @@ class MainLayoutFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
-        inflater.inflate(R.menu.bottom_app_bar, menu)
+        inflater.inflate(R.menu.main_app_menu, menu)
 
 }

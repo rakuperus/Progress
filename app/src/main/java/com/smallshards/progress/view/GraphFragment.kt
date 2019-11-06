@@ -22,7 +22,7 @@ class GraphFragment : Fragment() {
 
         // on an update of the data update the progress view
         progressViewModel.allProgress.observe(this, androidx.lifecycle.Observer { progress ->
-            progress?.let { progressView.changeProgressData(progress) }
+            progress?.let { progressView.changeProgressDataSet(progress) }
         })
 
     }

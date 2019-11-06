@@ -11,4 +11,7 @@ class ProgressRepository(private val progressDao: ProgressDao) {
         progressDao.insert(item)
     }
 
+    @WorkerThread
+    suspend fun deleteAll() = progressDao.deleteAll()
+
 }

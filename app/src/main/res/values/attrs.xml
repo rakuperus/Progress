@@ -6,5 +6,6 @@
         <attr name="strokeColor" format="color" />
         <attr name="strokeWidth" format="dimension" />
         <attr name="horizontalScale" format="integer" />
+        <attr name="strokeShadowVisible" format="boolean" />
     </declare-styleable>
 </resources>

@@ -23,4 +23,8 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
     fun insert(item: Progress) = viewModelScope.launch {
         repository.insert(item)
     }
+
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
 }

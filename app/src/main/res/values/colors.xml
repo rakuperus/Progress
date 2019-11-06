@@ -24,4 +24,6 @@
     <color name="two_star_color">#C0C0C0</color>
     <color name="three_star_color">#D4AF37</color>
 
+    <color name="default_graph_stroke">@color/colorPrimary</color>
+
 </resources>

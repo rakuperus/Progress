@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/delete_all_progress_menu_item"
+        android:icon="@drawable/ic_delete_forever_black_24dp"
+        android:title="@string/delete_all_progress_menu__title"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/add_magic_progress_menu_item"
+        android:icon="@drawable/ic_grain_black_24dp"
+        android:title="@string/add_random_data_menu_item"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/settings_menu_item"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/appbar_settings_title"
+        app:showAsAction="ifRoom" />
+</menu>

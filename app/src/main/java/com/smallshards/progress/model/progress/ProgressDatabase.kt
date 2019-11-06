@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.smallshards.progress.extension.addDays
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 @Dao
@@ -68,16 +70,16 @@ abstract class ProgressDatabase : RoomDatabase() {
         suspend fun populateDatabase(dao: ProgressDao) {
             dao.deleteAll()
 
-            dao.insert(Progress(1564668557000, 75))
-            dao.insert(Progress(1564754957000, 38))
-            dao.insert(Progress(1564841357000, 42))
-            dao.insert(Progress(1564927757000, 51))
-            dao.insert(Progress(1564938557000, -10))
-            dao.insert(Progress(1565014157000, 87))
-            dao.insert(Progress(1565100557000, 12))
-            dao.insert(Progress(1565186957000, 103))
-            dao.insert(Progress(1565273357000, 66))
-            dao.insert(Progress(1565359757000, 48))
+            dao.insert(Progress(Date().addDays(-9).time, 75))
+            dao.insert(Progress(Date().addDays(-7).time, 38))
+            dao.insert(Progress(Date().addDays(-5).time, 42))
+            dao.insert(Progress(Date().addDays(-4).time, 51))
+            dao.insert(Progress(Date().addDays(-4).time, -10))
+            dao.insert(Progress(Date().addDays(-4).time, 87))
+            dao.insert(Progress(Date().addDays(-4).time, 12))
+            dao.insert(Progress(Date().addDays(-2).time, 103))
+            dao.insert(Progress(Date().addDays(-1).time, 66))
+            dao.insert(Progress(Date().addDays(-1).time, 48))
         }
     }
 }

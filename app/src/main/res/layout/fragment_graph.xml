@@ -10,11 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/background_light"
+        android:padding="16dp"
         custom:minProgress="0"
         custom:maxProgress="100"
-        custom:strokeColor="@color/colorAccent"
-        custom:strokeWidth="4dp"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/horizontal_margin" />
+        custom:horizontalScale="8"
+        custom:strokeColor="@color/colorPrimaryDark"
+        custom:strokeShadowVisible="false"
+        custom:strokeWidth="3dp" />
 
 </LinearLayout>

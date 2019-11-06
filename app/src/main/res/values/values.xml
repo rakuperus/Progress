@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="default_stroke_width">4</integer>
+    <integer name="default_horizontal_scale">8</integer>
+    <integer name="default_vertical_min">0</integer>
+    <integer name="default_vertical_max">100</integer>
+    <integer name="default_view_margin">14</integer>
+</resources>

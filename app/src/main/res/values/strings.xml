@@ -18,4 +18,6 @@
     <string name="goal1_label">7 Minutes workout uitgevoerd</string>
     <string name="goal2_label">Gerend</string>
     <string name="goal3_label">Weekelijkse workout uitgevoerd</string>
+    <string name="delete_all_progress_menu__title">Delete all progress</string>
+    <string name="add_random_data_menu_item">Add random data</string>
 </resources>
