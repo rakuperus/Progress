@@ -6,6 +6,18 @@
     android:orientation="vertical"
     android:padding="@dimen/dialog_padding">
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/comment_inputtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/comment_title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/comment_inputtext"
+        android:text="@string/add_message_message_hint" />
+
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/comment_goal1_checkbox"
         android:layout_width="match_parent"
@@ -26,17 +38,5 @@
         android:layout_height="wrap_content"
         android:theme="@style/CheckBoxTheme"
         tool:text="Goal #2 achieved" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/comment_inputtext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/comment_title_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:labelFor="@id/comment_inputtext"
-        android:text="@string/add_message_message_hint" />
 
 </LinearLayout>
